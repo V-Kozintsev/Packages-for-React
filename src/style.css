@@ -6,3 +6,12 @@
 h1 {
   color: brown;
 }
+
+.container {
+  display: flex;
+  width: 500px;
+  height: 500px;
+  margin: 0 auto;
+  flex-direction: column;
+  text-align: center;
+}
