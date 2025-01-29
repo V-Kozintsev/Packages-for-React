@@ -1,5 +1,6 @@
+//Button.jsx
 import React from "react";
 
 export const Button = () => {
-  return <button>click</button>;
+  return <button>отправить</button>;
 };

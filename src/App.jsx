@@ -1,15 +1,21 @@
 //App.jsx
-import React from "react";
+import React, { useState } from "react";
 import { Form } from "./components/Form";
 
-const a = 0;
-function App() {
+export const App = () => {
+  const [count, setCount] = useState(0);
+
+  function handleClick() {
+    setCount(count + 1);
+  }
+
   return (
     <div className="container">
-      <h1>Hello, React!</h1>
+      <h1>Hello,React</h1>
       <Form />
+      <hr />
+      <p>count:{count}</p>
+      <button onClick={handleClick}>click here</button>
     </div>
   );
-}
-
-export default App;
+};
