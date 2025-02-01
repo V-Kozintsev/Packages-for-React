@@ -3,12 +3,7 @@ import Paragraph from "./Paragraph";
 export default {
   title: "Components/Paragraph",
   component: Paragraph,
-  argTypes: {
-    level: {
-      control: { type: "select" },
-      options: [1, 2, 3, 4, 5, 6],
-    },
-  },
+
 };
 
 export const Primary = {
