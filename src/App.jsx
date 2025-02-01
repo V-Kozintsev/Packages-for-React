@@ -1,23 +1,13 @@
 //App.jsx
-import React from "react";
 import { Heading } from "./components/Heading";
-import { Paragraph } from "./components/Paragraph";
-import { Spacer } from "./components/Spacer";
-import { Collapsible } from "./components/Collapsible";
+import React from "react";
 
-export function App() {
+export const App = () => {
   return (
-    <header>
-      <Heading level={1}>Главный заголовок</Heading>
-      <Heading level={2}>Второстепенный заголовок</Heading>
-      <Paragraph>
-        Это параграф текста. Здесь может быть много слов и предложений.
-      </Paragraph>
-      <Spacer height={"20px"} color={"red"} />
-      <Collapsible title="Схлопывающийся блок">
-        <Paragraph>Здесь контент схлопывающегося блока.</Paragraph>
-        <Paragraph>Тут еще один параграф.</Paragraph>
-      </Collapsible>
-    </header>
+    <div>
+      <Heading level={1} className="main-heading">
+        Главный заголовок страницы
+      </Heading>
+    </div>
   );
-}
+};
