@@ -1,5 +1,5 @@
 //App.jsx
-import { Heading } from "./components/Heading";
+import Heading from "./components/Heading";
 import React from "react";
 
 export const App = () => {

@@ -1,5 +1,5 @@
 // src/components/Heading.stories.jsx
-import { Heading } from "./Heading";
+import  Heading  from "./Heading";
 
 export default {
   title: "Components/Heading",
