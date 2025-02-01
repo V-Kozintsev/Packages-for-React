@@ -3,7 +3,7 @@ name: Deploy Storybook to GitHub Pages
 on:
   push:
     branches:
-      - main # Запускать при каждом push в main
+      - storybook-react # Запускать при каждом push в main
 
 jobs:
   deploy:
@@ -15,7 +15,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "18" # Или ваша версия Node.js
+          node-version: "22.13.1" # Или ваша версия Node.js
 
       - name: Install dependencies
         run: npm install
