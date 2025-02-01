@@ -22,7 +22,7 @@ export const Default = {
 
 export const CustomSize = {
   args: {
-    src: "/images/js.png",
+    src: "./images/js.png",
     alt: "JS Logo Custom Size",
     width: "200px",
     height: "200px",
