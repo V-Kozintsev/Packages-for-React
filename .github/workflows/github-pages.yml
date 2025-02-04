@@ -1,24 +1,31 @@
-name: GitHub Pages
+name: Deploy Storybook to GitHub Pages
 
 on:
-  pull_request:
+  push:
+    branches:
+      - storybook-react # Запускать при каждом push в main
 
 jobs:
   deploy:
-    runs-on: ubuntu-22.04
-    permissions:
-      contents: write
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      - name: Install Dependencies
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "22.13.1" # Или ваша версия Node.js
+
+      - name: Install dependencies
         run: npm install
 
-      - name: Build
-        run: npm run build
+      - name: Build Storybook
+        run: npm run build-storybook
 
-      - name: Deploy
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          publish_dir: ./storybook-static
+          publish_branch: gh-pages

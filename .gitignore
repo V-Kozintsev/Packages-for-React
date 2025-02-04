@@ -2,3 +2,5 @@ node_modules
 dist
 __mocks__
 coverage
+*storybook.log
+stories
