@@ -1,13 +1,18 @@
+//src/components/Map.jsx
 import React, { useRef, useEffect } from "react";
 import * as ymaps3 from "ymaps3";
+import { useSelector } from "react-redux";
 
-const Map = ({ longitude, latitude }) => {
+const Map = () => {
   const mapRef = useRef(null);
-  // Стандартные координаты по умолчанию
-  const defaultLongitude = 37.618423; // Москва (долгота)
-  const defaultLatitude = 55.751244; // Москва (широта)
+  const weather = useSelector((state) => state.weather);
+  const defaultLongitude = 37.618423;
+  const defaultLatitude = 55.751244;
 
   let map;
+
+  const longitude = weather?.lon;
+  const latitude = weather?.lat;
 
   useEffect(() => {
     const initMap = async () => {

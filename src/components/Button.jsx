@@ -1,4 +1,4 @@
-//Button.jsx
+//src/components/Button.jsx
 import React from "react";
 
 const Button = ({ id, children }) => {

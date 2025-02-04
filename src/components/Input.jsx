@@ -1,4 +1,4 @@
-//Input.jsx
+////src/components/Input.jsx
 import React from "react";
 
 const Input = ({ id, type, placeholder }) => {
