@@ -85,10 +85,5 @@
   },
   "dependencies": {
     "react-router-dom": "^7.1.5"
-  },
-  "jest": {
-    "setupFilesAfterEnv": [
-      "<rootDir>/src/setupTests.js"
-    ]
   }
 }

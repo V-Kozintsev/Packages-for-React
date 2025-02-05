@@ -46,22 +46,23 @@ const Settings = () => {
     <div id="settings-page" className="settings-page">
       <h2>Настройки</h2>
       <div className="settings-group">
-        <label>Тема:</label>
+        <label htmlFor="theme-select">Тема:</label>
         <select id="theme-select" value={theme} onChange={handleThemeChange}>
           <option value="light">Светлая</option>
           <option value="dark">Темная</option>
         </select>
       </div>
       <div className="settings-group">
-        <label>Единицы измерения:</label>
+        <label htmlFor="units-select">Единицы измерения:</label>
         <select id="units-select" value={units} onChange={handleUnitsChange}>
           <option value="celsius">Цельсий</option>
           <option value="fahrenheit">Фаренгейт</option>
         </select>
       </div>
       <div className="settings-group">
-        <label>Имя пользователя:</label>
+        <label htmlFor="username-input">Имя пользователя:</label>
         <input
+          id="username-input"
           type="text"
           value={username}
           onChange={handleUsernameChange}

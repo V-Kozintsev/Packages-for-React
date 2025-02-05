@@ -116,7 +116,7 @@ const initialState = {
   error: null,
   theme: localStorage.getItem("theme") || "light",
   units: localStorage.getItem("units") || "celsius",
-  username: localStorage.getItem("username") || "", // Добавили username
+  username: localStorage.getItem("username") || "",
 };
 
 const weatherSlice = createSlice({
@@ -147,7 +147,7 @@ const weatherSlice = createSlice({
         } catch (e) {
           console.error("Ошибка при разборе истории из localStorage:", e);
           localStorage.removeItem("weatherHistory");
-          state.history = []; // Очищаем историю, если произошла ошибка
+          state.history = [];
         }
       }
     },
@@ -164,16 +164,21 @@ const weatherSlice = createSlice({
       state.units = newUnits;
       localStorage.setItem("units", newUnits);
 
-      // Обновляем историю при изменении единиц измерения
-      state.history = state.history.map((item) => {
-        let temp = item.temp;
-        if (newUnits === "fahrenheit" && item.units === "celsius") {
-          temp = Math.round((item.temp * 9) / 5 + 32);
-        } else if (newUnits === "celsius" && item.units === "fahrenheit") {
-          temp = Math.round(((item.temp - 32) * 5) / 9);
-        }
-        return { ...item, temp: temp, units: newUnits };
-      });
+      // Проверяем, если history существует и является массивом
+      if (Array.isArray(state.history)) {
+        state.history = state.history.map((item) => {
+          let temp = item.temp;
+          if (newUnits === "fahrenheit" && item.units === "celsius") {
+            temp = Math.round((item.temp * 9) / 5 + 32);
+          } else if (newUnits === "celsius" && item.units === "fahrenheit") {
+            temp = Math.round(((item.temp - 32) * 5) / 9);
+          }
+          return { ...item, temp: temp, units: newUnits };
+        });
+      } else {
+        console.warn("History is not an array", state.history);
+        state.history = []; // Восстанавливаем history если это необходимо
+      }
     },
   },
   extraReducers: (builder) => {

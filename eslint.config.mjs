@@ -9,23 +9,20 @@ export default [
       globals: {
         ...globals.browser,
         ...globals.jest,
-        module: "readonly", // Allow module globally
-        require: "readonly", // Allow require globally
-        process: "readonly", // Allow process globally
-        __dirname: "readonly", // Allow __dirname globally
+        global: "readonly", // Добавлено определение global
+        module: "readonly",
+        require: "readonly",
+        process: "readonly",
+        __dirname: "readonly",
       },
     },
   },
-
   pluginJs.configs.recommended,
-
-  // Overrides for specific files
   {
     files: ["babel.config.js", "webpack.config.js"],
     rules: {
-      "no-undef": "off", // Disable the no-undef rule for these files
-
-      "import/no-extraneous-dependencies": "off", // Disable any dependency rules
+      "no-undef": "off",
+      "import/no-extraneous-dependencies": "off",
     },
   },
 ];
