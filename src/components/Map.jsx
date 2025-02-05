@@ -1,53 +1,44 @@
-//src/components/Map.jsx
-import React, { useRef, useEffect } from "react";
-import * as ymaps3 from "ymaps3";
-import { useSelector } from "react-redux";
+import React, { useEffect, useRef } from "react";
+import * as YMap from "ymaps3"; // Use official import
 
-const Map = () => {
+const Map = ({ longitude, latitude }) => {
   const mapRef = useRef(null);
-  const weather = useSelector((state) => state.weather);
-  const defaultLongitude = 37.618423;
-  const defaultLatitude = 55.751244;
-
-  let map;
-
-  const longitude = weather?.lon;
-  const latitude = weather?.lat;
 
   useEffect(() => {
-    const initMap = async () => {
-      await ymaps3.ready;
-      const { YMap, YMapDefaultSchemeLayer } = ymaps3;
-      const currentLongitude =
-        longitude !== undefined ? longitude : defaultLongitude;
-      const currentLatitude =
-        latitude !== undefined ? latitude : defaultLatitude;
+    let mapInstance = null;
 
-      if (mapRef.current) {
-        if (mapRef.current.map) {
-          mapRef.current.map.update({
-            location: {
-              center: [currentLongitude, currentLatitude],
-              zoom: 10,
-            },
-          });
-        } else {
-          map = new YMap(mapRef.current, {
-            location: {
-              center: [currentLongitude, currentLatitude],
-              zoom: 10,
-            },
-          });
-          map.addChild(new YMapDefaultSchemeLayer());
-          mapRef.current.map = map;
-        }
+    const initMap = async () => {
+      if (typeof YMap.ready !== "undefined") {
+        await YMap.ready;
+
+        const map = new YMap.YMap(mapRef.current, {
+          location: {
+            center: [longitude, latitude],
+            zoom: 10,
+          },
+        });
+
+        map.addChild(new YMap.YMapDefaultSchemeLayer());
+        return map;
+      } else {
+        console.error(
+          "YMap.ready is undefined. Check if Yandex Maps API is correctly loaded."
+        );
+        return null;
       }
     };
-    initMap();
+
+    const loadMap = async () => {
+      if (longitude && latitude) {
+        mapInstance = await initMap();
+      }
+    };
+
+    loadMap();
+
     return () => {
-      if (mapRef.current?.map) {
-        mapRef.current.map.destroy();
-        mapRef.current.map = null;
+      if (mapInstance) {
+        mapInstance.destroy();
       }
     };
   }, [longitude, latitude]);
@@ -57,7 +48,7 @@ const Map = () => {
       id="map"
       className="map"
       ref={mapRef}
-      style={{ width: "100%", height: "400px" }}
+      style={{ width: "100%", height: "200px" }}
     ></div>
   );
 };
