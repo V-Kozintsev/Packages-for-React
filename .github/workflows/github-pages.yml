@@ -1,31 +1,24 @@
-name: Deploy Weather App to GitHub Pages
+name: GitHub Pages
 
 on:
-  push:
-    branches:
-      - storybook-react # Запускать при каждом push в эту ветку
+  pull_request:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "22.13.1" # Или ваша версия Node.js
-
-      - name: Install dependencies
+      - name: Install Dependencies
         run: npm install
 
-      - name: Build Weather App
-        run: npm run build # Изменено: используем команду для сборки приложения
+      - name: Build
+        run: npm run build
 
-      - name: Deploy to GitHub Pages
+      - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist # Изменено: публикуем каталог dist
-          publish_branch: gh-pages
+          publish_dir: ./dist
