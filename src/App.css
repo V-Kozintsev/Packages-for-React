@@ -402,7 +402,40 @@ body.dark-theme .settings-page select {
 #back-button:hover {
   background-color: #546e7a;
 }
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.loader::before {
+  content: "";
+  width: 100px;
+  height: 100px;
+  border: 16px solid var(--primary-color);
+  border-top: 16px solid transparent;
+  border-radius: 50%;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 /* Адаптивность */
 /* Для средних экранов (планшеты) */
 @media (max-width: 768px) {

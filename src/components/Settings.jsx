@@ -1,29 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setTheme, setUnits } from "../features/weather/weatherSlice";
+import {
+  setTheme,
+  setUnits,
+  setUsername,
+} from "../features/weather/weatherSlice";
 import { useNavigate } from "react-router-dom";
 
 const Settings = () => {
-  const theme = useSelector((state) => state.weather.theme);
-  const units = useSelector((state) => state.weather.units);
+  const themeFromStore = useSelector((state) => state.weather.theme);
+  const unitsFromStore = useSelector((state) => state.weather.units);
+  const usernameFromStore = useSelector((state) => state.weather.username); // Получаем текущее имя пользователя
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [theme, setThemeLocal] = useState(themeFromStore);
+  const [units, setUnitsLocal] = useState(unitsFromStore);
+  const [username, setUsernameLocal] = useState(usernameFromStore); // Локальное состояние для имени пользователя
+
   const handleThemeChange = (e) => {
-    dispatch(setTheme(e.target.value));
+    setThemeLocal(e.target.value);
   };
 
   const handleUnitsChange = (e) => {
-    dispatch(setUnits(e.target.value));
+    setUnitsLocal(e.target.value);
+  };
+
+  const handleUsernameChange = (e) => {
+    setUsernameLocal(e.target.value); // Обновляем локальное состояние имени
   };
 
   const handleSaveSettings = () => {
-    //  Убираем навигацию, чтобы остаться на странице настроек
+    dispatch(setTheme(theme));
+    dispatch(setUnits(units));
+    dispatch(setUsername(username)); // Сохраняем обновленное имя в Redux
     console.log("Настройки сохранены!");
   };
 
   const handleGoHome = () => {
-    navigate("/"); // Переход на главную страницу
+    navigate("/");
   };
 
   return (
@@ -43,12 +59,18 @@ const Settings = () => {
           <option value="fahrenheit">Фаренгейт</option>
         </select>
       </div>
+      <div className="settings-group">
+        <label>Имя пользователя:</label>
+        <input
+          type="text"
+          value={username}
+          onChange={handleUsernameChange} // Обновляем имя пользователя в локальном состоянии
+        />
+      </div>
       <button type="button" id="save-settings" onClick={handleSaveSettings}>
         Сохранить
       </button>
       <button type="button" id="home-button" onClick={handleGoHome}>
-        {" "}
-        {/* Кнопка "На главную" */}
         На главную
       </button>
     </div>

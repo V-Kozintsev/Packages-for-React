@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   About,
   History,
@@ -7,24 +8,28 @@ import {
   Settings,
   WeatherInfo,
 } from "./components";
-import { useDispatch, useSelector } from "react-redux";
 import {
   fetchWeatherByCoords,
   loadHistoryFromStorage,
   setTheme,
   fetchWeatherByCity,
-} from "./features/weather/weatherSlice"; // ИМПОРТ ИЗ weatherSlice.js
+  setUsername, // Импортируем новый экшен
+} from "./features/weather/weatherSlice";
 import { Link, useLocation, useParams } from "react-router-dom";
 import "./App.css";
 
 const App = () => {
   const dispatch = useDispatch();
-  const theme = useSelector((state) => state.weather.theme); // Доступ к theme через state.weather
+  const theme = useSelector((state) => state.weather.theme);
+  const loading = useSelector((state) => state.weather.loading);
   const location = useLocation();
   const { city } = useParams();
+  const history = useSelector((state) => state.weather.history);
+  const weather = useSelector((state) => state.weather.weather);
+  const username = useSelector((state) => state.weather.username);
 
-  const history = useSelector((state) => state.weather.history); // Доступ к history через state.weather
-  const weather = useSelector((state) => state.weather.weather); // Доступ к weather через state.weather
+  const [isFirstLoad, setIsFirstLoad] = useState(!username); // Проверяем, есть ли имя пользователя в состоянии
+  const [usernameInput, setUsernameInput] = useState(username || ""); // Задаем начальное состояние
 
   useEffect(() => {
     dispatch(loadHistoryFromStorage());
@@ -38,11 +43,9 @@ const App = () => {
   useEffect(() => {
     const fetchWeather = async () => {
       if (city) {
-        // Если город есть в URL, то ищем погоду для него
         dispatch(fetchWeatherByCity({ city: city, addToHistory: true }));
-        localStorage.setItem("lastCity", city); // Сохраняем город в localStorage
+        localStorage.setItem("lastCity", city);
       } else {
-        // Пытаемся получить текущее местоположение
         try {
           const position = await new Promise((resolve, reject) => {
             navigator.geolocation.getCurrentPosition(resolve, reject);
@@ -50,23 +53,14 @@ const App = () => {
 
           const { latitude, longitude } = position.coords;
           dispatch(
-            fetchWeatherByCoords({
-              latitude,
-              longitude,
-              addToHistory: false,
-            })
+            fetchWeatherByCoords({ latitude, longitude, addToHistory: false })
           );
         } catch (error) {
-          console.error("Ошибка геолокации:", error);
-          // Если не удалось получить геолокацию, пытаемся получить lastCity из localStorage
           const lastCity = localStorage.getItem("lastCity");
           if (lastCity) {
             dispatch(
               fetchWeatherByCity({ city: lastCity, addToHistory: true })
             );
-          } else {
-            // TODO: Показать сообщение пользователю, что не удалось определить местоположение
-            console.log("Не удалось определить местоположение и нет lastCity");
           }
         }
       }
@@ -84,8 +78,40 @@ const App = () => {
     document.body.className = theme === "dark" ? "dark-theme" : "";
   };
 
+  const handleUsernameSubmit = (e) => {
+    e.preventDefault();
+    if (usernameInput.trim()) {
+      // Проверяем, что имя не пустое
+      dispatch(setUsername(usernameInput.trim())); // Обновляем имя в Redux
+      localStorage.setItem("username", usernameInput.trim());
+      setIsFirstLoad(false);
+    } else {
+      alert("Имя не должно быть пустым!"); // Сообщение об ошибке
+    }
+  };
+
+  if (isFirstLoad) {
+    return (
+      <div className="username-form">
+        <form onSubmit={handleUsernameSubmit}>
+          <label>
+            Введите ваше имя:
+            <input
+              type="text"
+              value={usernameInput}
+              onChange={(e) => setUsernameInput(e.target.value)}
+              required
+            />
+          </label>
+          <button type="submit">Подтвердить</button>
+        </form>
+      </div>
+    );
+  }
+
   return (
     <div id="app">
+      <h1>Добро пожаловать, {username || "Гость"}!</h1>
       <div className="button-wrapper">
         <Link to="/settings" className="button">
           Настройки
@@ -94,8 +120,9 @@ const App = () => {
           О приложении
         </Link>
       </div>
-
-      {location.pathname === "/settings" ? (
+      {loading ? (
+        <div className="loader"></div>
+      ) : location.pathname === "/settings" ? (
         <Settings />
       ) : location.pathname === "/about" ? (
         <About />

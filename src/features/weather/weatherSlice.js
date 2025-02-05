@@ -116,6 +116,7 @@ const initialState = {
   error: null,
   theme: localStorage.getItem("theme") || "light",
   units: localStorage.getItem("units") || "celsius",
+  username: localStorage.getItem("username") || "", // Добавили username
 };
 
 const weatherSlice = createSlice({
@@ -149,6 +150,10 @@ const weatherSlice = createSlice({
           state.history = []; // Очищаем историю, если произошла ошибка
         }
       }
+    },
+    setUsername: (state, action) => {
+      state.username = action.payload; // Сохраняем имя пользователя
+      localStorage.setItem("username", action.payload); // Сохраняем в localStorage
     },
     setTheme: (state, action) => {
       state.theme = action.payload;
@@ -218,6 +223,7 @@ export const {
   loadHistoryFromStorage,
   setTheme,
   setUnits,
+  setUsername,
 } = weatherSlice.actions;
 
 // Remove this line - it's no longer needed
