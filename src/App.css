@@ -436,6 +436,115 @@ body.dark-theme .settings-page select {
     transform: rotate(360deg);
   }
 }
+.username-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--background-color);
+}
+
+.form-container {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 8px var(--box-shadow-color);
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.label {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: var(--text-color);
+}
+
+.input-username {
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  width: 100%;
+  margin-bottom: 15px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.input-username:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+.submit-button {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 1rem;
+  transition:
+    background-color 0.3s ease,
+    transform 0.1s ease,
+    box-shadow 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: var(--secondary-color);
+}
+
+.submit-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 3px var(--box-shadow-color);
+}
+.weekly-forecast {
+  display: flex;
+  overflow-x: auto; /* Горизонтальная прокрутка */
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 6px var(--box-shadow-color);
+}
+
+.daily-forecast {
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 15px;
+  margin-right: 15px;
+  min-width: 150px; /* Устанавливаем минимальную ширину для каждого элемента */
+  text-align: center;
+  box-shadow: 0 1px 3px var(--box-shadow-color);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.daily-forecast:hover {
+  transform: translateY(-2px); /* Поднимаем карточку при наведении */
+  box-shadow: 0 3px 8px var(--box-shadow-color);
+}
+
+.forecast-date {
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.forecast-temperature {
+  font-size: 1.5rem;
+  margin: 5px 0;
+}
+
+.forecast-icon {
+  width: 50px; /* Задаем размер иконок */
+  height: 50px;
+}
+
+.forecast-wind,
+.forecast-humidity {
+  font-size: 0.9rem;
+  color: var(--light-text-color);
+}
 /* Адаптивность */
 /* Для средних экранов (планшеты) */
 @media (max-width: 768px) {

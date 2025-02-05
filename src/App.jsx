@@ -55,6 +55,7 @@ const App = () => {
           dispatch(
             fetchWeatherByCoords({ latitude, longitude, addToHistory: false })
           );
+          dispatch(fetchWeeklyWeatherByCoords({ latitude, longitude }));
         } catch (error) {
           const lastCity = localStorage.getItem("lastCity");
           if (lastCity) {
@@ -90,10 +91,11 @@ const App = () => {
     }
   };
 
+  // Обновленная форма ввода имени в компоненте App
   if (isFirstLoad) {
     return (
       <div className="username-form">
-        <form onSubmit={handleUsernameSubmit}>
+        <form onSubmit={handleUsernameSubmit} className="form-container">
           <label>
             Введите ваше имя:
             <input
@@ -101,9 +103,12 @@ const App = () => {
               value={usernameInput}
               onChange={(e) => setUsernameInput(e.target.value)}
               required
+              className="input-username"
             />
           </label>
-          <button type="submit">Подтвердить</button>
+          <button type="submit" className="submit-button">
+            Подтвердить
+          </button>
         </form>
       </div>
     );

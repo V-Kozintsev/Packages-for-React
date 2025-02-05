@@ -64,7 +64,8 @@ const Settings = () => {
         <input
           type="text"
           value={username}
-          onChange={handleUsernameChange} // Обновляем имя пользователя в локальном состоянии
+          onChange={handleUsernameChange}
+          className="input-username" // Применяем те же стили // Обновляем имя пользователя в локальном состоянии
         />
       </div>
       <button type="button" id="save-settings" onClick={handleSaveSettings}>

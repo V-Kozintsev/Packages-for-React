@@ -1,3 +1,4 @@
+//index.js
 export { default as About } from "./About";
 export { default as History } from "./History";
 export { default as Map } from "./Map";
