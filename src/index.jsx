@@ -2,16 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { Provider } from "react-redux";
-import { configureStore } from "@reduxjs/toolkit";
-import weatherReducer from "./features/weather/weatherSlice";
 import { HashRouter, Routes, Route } from "react-router-dom";
-import * as YMap from "ymaps3";
 
-const store = configureStore({
-  reducer: {
-    weather: weatherReducer,
-  },
-});
+import store from "./store/store"; // Import the store from store.js
+import * as YMap from "ymaps3";
 
 const initializeYMap = async () => {
   await YMap.ready; // Wait for YMap to be ready

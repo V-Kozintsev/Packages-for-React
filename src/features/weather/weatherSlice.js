@@ -220,4 +220,7 @@ export const {
   setUnits,
 } = weatherSlice.actions;
 
+// Remove this line - it's no longer needed
+// export { fetchWeatherByCoords, fetchWeatherByCity };
+
 export default weatherSlice.reducer;

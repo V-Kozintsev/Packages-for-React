@@ -14,7 +14,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "test:loki": "loki test",
-    "test:loki:approve": "loki approve"
+    "test:loki:approve": "loki approve",
+    "eject": "react-scripts eject"
   },
   "author": "",
   "license": "ISC",

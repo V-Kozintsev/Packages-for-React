@@ -13,18 +13,18 @@ import {
   loadHistoryFromStorage,
   setTheme,
   fetchWeatherByCity,
-} from "./features/weather/weatherSlice";
+} from "./features/weather/weatherSlice"; // ИМПОРТ ИЗ weatherSlice.js
 import { Link, useLocation, useParams } from "react-router-dom";
 import "./App.css";
 
 const App = () => {
   const dispatch = useDispatch();
-  const theme = useSelector((state) => state.weather.theme);
+  const theme = useSelector((state) => state.weather.theme); // Доступ к theme через state.weather
   const location = useLocation();
   const { city } = useParams();
 
-  const history = useSelector((state) => state.weather.history);
-  const weather = useSelector((state) => state.weather.weather);
+  const history = useSelector((state) => state.weather.history); // Доступ к history через state.weather
+  const weather = useSelector((state) => state.weather.weather); // Доступ к weather через state.weather
 
   useEffect(() => {
     dispatch(loadHistoryFromStorage());

@@ -1,9 +1,9 @@
-name: Deploy Storybook to GitHub Pages
+name: Deploy Weather App to GitHub Pages
 
 on:
   push:
     branches:
-      - storybook-react # Запускать при каждом push в main
+      - storybook-react # Запускать при каждом push в эту ветку
 
 jobs:
   deploy:
@@ -20,12 +20,12 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build Storybook
-        run: npm run build-storybook
+      - name: Build Weather App
+        run: npm run build # Изменено: используем команду для сборки приложения
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./storybook-static
+          publish_dir: ./dist # Изменено: публикуем каталог dist
           publish_branch: gh-pages
