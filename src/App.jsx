@@ -11,14 +11,15 @@ import {
 import {
   fetchWeatherByCoords,
   loadHistoryFromStorage,
-  setTheme,
   fetchWeatherByCity,
-  setUsername, // Импортируем новый экшен
+  setUsername,
 } from "./features/weather/weatherSlice";
 import { Link, useLocation, useParams } from "react-router-dom";
+import packageJson from "../package.json";
 import "./App.css";
 
 const App = () => {
+  const appVersion = packageJson.version;
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.weather.theme);
   const loading = useSelector((state) => state.weather.loading);
@@ -28,8 +29,8 @@ const App = () => {
   const weather = useSelector((state) => state.weather.weather);
   const username = useSelector((state) => state.weather.username);
 
-  const [isFirstLoad, setIsFirstLoad] = useState(!username); // Проверяем, есть ли имя пользователя в состоянии
-  const [usernameInput, setUsernameInput] = useState(username || ""); // Задаем начальное состояние
+  const [isFirstLoad, setIsFirstLoad] = useState(!username);
+  const [usernameInput, setUsernameInput] = useState(username || "");
 
   useEffect(() => {
     dispatch(loadHistoryFromStorage());
@@ -82,16 +83,14 @@ const App = () => {
   const handleUsernameSubmit = (e) => {
     e.preventDefault();
     if (usernameInput.trim()) {
-      // Проверяем, что имя не пустое
-      dispatch(setUsername(usernameInput.trim())); // Обновляем имя в Redux
+      dispatch(setUsername(usernameInput.trim()));
       localStorage.setItem("username", usernameInput.trim());
       setIsFirstLoad(false);
     } else {
-      alert("Имя не должно быть пустым!"); // Сообщение об ошибке
+      alert("Имя не должно быть пустым!");
     }
   };
 
-  // Обновленная форма ввода имени в компоненте App
   if (isFirstLoad) {
     return (
       <div className="username-form">
@@ -130,7 +129,7 @@ const App = () => {
       ) : location.pathname === "/settings" ? (
         <Settings />
       ) : location.pathname === "/about" ? (
-        <About />
+        <About appVersion={appVersion} />
       ) : (
         <>
           <SearchForm />

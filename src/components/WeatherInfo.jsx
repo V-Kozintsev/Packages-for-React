@@ -9,7 +9,7 @@ const WeatherInfo = () => {
   console.log("WeatherInfo: units =", units);
 
   if (!weather) {
-    return <div className="displayWeatherInfo"></div>;
+    return <div className="displayWeatherInfo">Загрузка...</div>;
   }
 
   const temperature = weather.temp; // Получаем температуру из weather
@@ -21,7 +21,7 @@ const WeatherInfo = () => {
         {weather.city}
       </p>
       <p className="weather-description" id="temp">
-        {temperature}°{unitSymbol} {/* Используем temperature и unitSymbol */}
+        {temperature}°{unitSymbol}
       </p>
       {weather.iconUrl && (
         <img id="weather-icon" src={weather.iconUrl} alt="Иконка погоды" />

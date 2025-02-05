@@ -1,4 +1,5 @@
 // src/features/weather/weatherApi.js
+
 export const fetchWeather = async (city) => {
   // Здесь должен быть код для выполнения API-запроса
   // и возврата данных о погоде

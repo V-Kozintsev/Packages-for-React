@@ -28,17 +28,28 @@ const About = ({ appVersion }) => {
         <li>WeatherAPI (для получения данных о погоде)</li>
         <li>Yandex Maps API (для отображения карты)</li>
       </ul>
-      <p>Разработчик: Ваше Имя</p>
-      <p>Контакт: your.email@example.com</p>
+      <p>Разработчик: Виктор</p>
       <p>
-        Репозиторий на
-        <a href="https://github.com/V-Kozintsev" target="_blank">
+        Контакт:{" "}
+        <a
+          href="https://t.me/viktorkozintsev"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          https://t.me/viktorkozintsev
+        </a>
+      </p>
+      <p>
+        Репозиторий на{" "}
+        <a
+          href="https://github.com/V-Kozintsev"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           GitHub
         </a>
       </p>
       <button type="button" id="home-button" onClick={handleGoHome}>
-        {" "}
-        {/* Кнопка "На главную" */}
         На главную
       </button>
     </div>

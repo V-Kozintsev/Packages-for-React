@@ -539,6 +539,70 @@ body.dark-theme .settings-page select {
   width: 50px; /* Задаем размер иконок */
   height: 50px;
 }
+.displayWeatherInfo {
+  display: flex;
+  flex-direction: column; /* Устанавливаем вертикальную ориентацию */
+  align-items: center; /* Центрируем элементы по горизонтали */
+  justify-content: center; /* Центрируем элементы по вертикали */
+  width: 100%;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 6px var(--box-shadow-color);
+  text-align: center; /* Центрируем текст внутри */
+  margin-bottom: 25px;
+  box-sizing: border-box;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
+}
+#about-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Центрирует содержимое */
+  padding: 20px;
+  background-color: #f9f9f9; /* Светлый фон страницы */
+  border-radius: 8px; /* Скругленные углы */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Легкая тень */
+  margin: 20px auto; /* Отступ для центрирования */
+  max-width: 600px; /* Максимальная ширина для удобства чтения */
+}
+
+h2 {
+  color: #333; /* Темный цвет заголовка для контраста */
+  font-size: 24px; /* Размер заголовка */
+  margin-bottom: 20px; /* Отступ снизу */
+}
+
+p {
+  color: #555; /* Серый цвет для текста */
+  line-height: 1.6; /* Интерлиньяж для лучшей читаемости */
+  margin: 10px 0; /* Отступы между абзацами */
+}
+
+ul {
+  list-style-type: none; /* Убираем стандартные маркеры списков */
+  padding: 0; /* Убираем отступы списка */
+  margin: 10px 0; /* Отступы для списка */
+}
+
+li {
+  background-color: #e3f2fd; /* Легкий синий фон для пунктов списка */
+  padding: 8px 12px; /* Внутренние отступы */
+  border-radius: 4px; /* Скругление углов */
+  margin: 6px 0; /* Отступ между элементами списка */
+}
+
+a {
+  color: #1976d2; /* Синий цвет для ссылок */
+  text-decoration: none; /* Убираем подчеркивание */
+}
+
+a:hover {
+  text-decoration: underline; /* Подчеркивание при наведении */
+}
 
 .forecast-wind,
 .forecast-humidity {
