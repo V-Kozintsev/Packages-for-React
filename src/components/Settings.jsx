@@ -1,14 +1,13 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setTheme, setUnits } from "../features/weather/weatherSlice";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Settings = () => {
   const theme = useSelector((state) => state.weather.theme);
   const units = useSelector((state) => state.weather.units);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
 
   const handleThemeChange = (e) => {
     dispatch(setTheme(e.target.value));
@@ -23,8 +22,8 @@ const Settings = () => {
     console.log("Настройки сохранены!");
   };
 
-  const handleBack = () => {
-    navigate(-1); // Возврат на предыдущую страницу
+  const handleGoHome = () => {
+    navigate("/"); // Переход на главную страницу
   };
 
   return (
@@ -47,8 +46,10 @@ const Settings = () => {
       <button type="button" id="save-settings" onClick={handleSaveSettings}>
         Сохранить
       </button>
-      <button type="button" id="back-button" onClick={handleBack}>
-        Назад
+      <button type="button" id="home-button" onClick={handleGoHome}>
+        {" "}
+        {/* Кнопка "На главную" */}
+        На главную
       </button>
     </div>
   );

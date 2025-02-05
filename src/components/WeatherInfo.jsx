@@ -5,9 +5,15 @@ const WeatherInfo = () => {
   const weather = useSelector((state) => state.weather.weather);
   const units = useSelector((state) => state.weather.units);
 
+  console.log("WeatherInfo: weather =", weather);
+  console.log("WeatherInfo: units =", units);
+
   if (!weather) {
     return <div className="displayWeatherInfo"></div>;
   }
+
+  const temperature = weather.temp; // Получаем температуру из weather
+  const unitSymbol = units === "fahrenheit" ? "F" : "C"; // Определяем символ единицы
 
   return (
     <div className="displayWeatherInfo">
@@ -15,7 +21,7 @@ const WeatherInfo = () => {
         {weather.city}
       </p>
       <p className="weather-description" id="temp">
-        {weather.temp}°{units === "fahrenheit" ? "F" : "C"}
+        {temperature}°{unitSymbol} {/* Используем temperature и unitSymbol */}
       </p>
       {weather.iconUrl && (
         <img id="weather-icon" src={weather.iconUrl} alt="Иконка погоды" />

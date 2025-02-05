@@ -1,6 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const About = ({ appVersion }) => {
+  const navigate = useNavigate();
+
+  const handleGoHome = () => {
+    navigate("/"); // Переход на главную страницу
+  };
+
   return (
     <div id="about-page">
       <h2>О приложении</h2>
@@ -29,6 +36,11 @@ const About = ({ appVersion }) => {
           GitHub
         </a>
       </p>
+      <button type="button" id="home-button" onClick={handleGoHome}>
+        {" "}
+        {/* Кнопка "На главную" */}
+        На главную
+      </button>
     </div>
   );
 };

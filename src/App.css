@@ -1,4 +1,3 @@
-/* Общие стили */
 :root {
   --primary-color: #4caf50;
   --secondary-color: #8bc34a;
@@ -74,11 +73,12 @@ h1 {
   margin-bottom: 25px;
 }
 
-.button {
-  display: inline-block;
+.button,
+#home-button,
+#save-settings,
+#back-button,
+.del-history-button {
   padding: 12px 24px;
-  background-color: var(--primary-color);
-  color: white;
   border: none;
   border-radius: var(--border-radius);
   cursor: pointer;
@@ -93,15 +93,31 @@ h1 {
     box-shadow 0.3s ease;
 }
 
-.button:hover {
-  background-color: var(--secondary-color);
-  transform: translateY(-2px);
-  box-shadow: 0 3px 8px var(--box-shadow-color);
+.button {
+  background-color: var(--primary-color);
+  color: white;
 }
 
-.button:active {
+.button:hover {
+  background-color: var(--secondary-color);
+}
+
+.button:active,
+#home-button:active,
+#save-settings:active,
+#back-button:active,
+.del-history-button:active {
   transform: translateY(0);
   box-shadow: 0 1px 3px var(--box-shadow-color);
+}
+
+#home-button {
+  background-color: var(--primary-color); /* Green */
+  color: white;
+}
+
+#home-button:hover {
+  background-color: #3e8e41;
 }
 
 /* Форма ввода */
@@ -113,7 +129,11 @@ h1 {
   overflow: hidden;
   box-shadow: 0 1px 4px var(--box-shadow-color);
   transition: box-shadow 0.3s ease;
-  border: 1px solid var(--border-color); /* Добавляем обводку */
+  border: 1px solid var(--border-color);
+}
+
+body.dark-theme .search-form {
+  border-color: var(--light-text-color);
 }
 
 .input-city {
@@ -199,107 +219,7 @@ h1 {
     color 0.3s ease,
     border-color 0.3s ease;
 }
-body.dark-theme .search-form {
-  border-color: var(--light-text-color); /* Меняем цвет обводки в темной теме */
-}
 
-.input-city {
-  padding: 14px 16px;
-  border: none;
-  font-size: 1rem;
-  font-weight: 300;
-  flex-grow: 1;
-  box-sizing: border-box;
-  outline: none;
-  color: var(--text-color);
-  background-color: transparent;
-  transition:
-    color 0.3s ease,
-    box-shadow 0.3s ease;
-}
-
-.input-city::placeholder {
-  color: var(--light-text-color);
-  opacity: 0.8;
-  transition: color 0.3s ease;
-}
-
-.input-city:focus {
-  box-shadow: inset 0 1px 3px var(--box-shadow-color);
-}
-
-.btn-search {
-  padding: 14px 24px;
-  background-color: var(--accent-color);
-  color: var(--text-color);
-  border: none;
-  cursor: pointer;
-  font-size: 1rem;
-  font-weight: 500;
-  transition:
-    background-color 0.3s ease,
-    transform 0.1s ease,
-    box-shadow 0.3s ease,
-    color 0.3s ease;
-  box-shadow: none;
-  outline: none;
-}
-/* ... (остальные стили) ... */
-
-/* Стили для кнопок на странице настроек */
-#save-settings,
-#back-button {
-  padding: 12px 24px;
-  border: none;
-  border-radius: var(--border-radius);
-  cursor: pointer;
-  font-size: 1rem;
-  font-weight: 400;
-  transition:
-    background-color 0.3s ease,
-    transform 0.1s ease,
-    box-shadow 0.3s ease,
-    color 0.3s ease;
-  box-shadow: 0 2px 6px var(--box-shadow-color);
-  margin: 5px;
-  color: white; /* Белый текст для обеих кнопок */
-}
-
-#save-settings {
-  background-color: var(--primary-color); /* Зеленый для "Сохранить" */
-}
-
-#back-button {
-  background-color: #607d8b; /* Сине-серый для "Назад" */
-}
-
-#save-settings:hover {
-  background-color: var(--secondary-color);
-  transform: translateY(-2px);
-  box-shadow: 0 3px 8px var(--box-shadow-color);
-}
-
-#back-button:hover {
-  background-color: #546e7a;
-  transform: translateY(-2px);
-  box-shadow: 0 3px 8px var(--box-shadow-color);
-}
-
-#save-settings:active,
-#back-button:active {
-  transform: translateY(0);
-  box-shadow: 0 1px 3px var(--box-shadow-color);
-}
-.btn-search:hover {
-  background-color: #f0ab00;
-  transform: translateY(-2px);
-  box-shadow: 0 3px 8px var(--box-shadow-color);
-}
-
-.btn-search:active {
-  transform: translateY(0);
-  box-shadow: 0 1px 3px var(--box-shadow-color);
-}
 body.dark-theme .display-weather-info {
   background-color: #424242;
   border-color: #616161;
@@ -370,30 +290,16 @@ body.dark-theme .history p:hover {
 
 /* Кнопка "Удалить историю" */
 .del-history-button {
-  padding: 10px 16px;
   background-color: #f44336; /* Красный */
   color: white;
-  border: none;
-  border-radius: var(--border-radius);
-  cursor: pointer;
   font-size: 0.9rem;
-  font-weight: 400;
-  box-shadow: 0 1px 3px var(--box-shadow-color);
-  transition:
-    background-color 0.3s ease,
-    transform 0.1s ease,
-    box-shadow 0.3s ease;
+  padding: 10px 16px;
 }
 
 .del-history-button:hover {
   background-color: #e53935;
   transform: translateY(-2px);
   box-shadow: 0 2px 6px var(--box-shadow-color);
-}
-
-.del-history-button:active {
-  transform: translateY(0);
-  box-shadow: 0 1px 2px var(--box-shadow-color);
 }
 
 /* Страница "О приложении" и Настроек */
@@ -479,7 +385,26 @@ body.dark-theme .settings-page select {
   box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25);
 }
 
+#save-settings {
+  background-color: var(--primary-color); /* Зеленый для "Сохранить" */
+  color: white;
+}
+
+#back-button {
+  background-color: #607d8b; /* Сине-серый для "Назад" */
+  color: white;
+}
+
+#save-settings:hover {
+  background-color: var(--secondary-color);
+}
+
+#back-button:hover {
+  background-color: #546e7a;
+}
+
 /* Адаптивность */
+/* Для средних экранов (планшеты) */
 @media (max-width: 768px) {
   #app {
     padding: 20px;
@@ -495,7 +420,10 @@ body.dark-theme .settings-page select {
     margin-bottom: 20px;
   }
 
-  .button {
+  .button,
+  #home-button,
+  #save-settings,
+  #back-button {
     font-size: 0.9rem;
     padding: 10px 20px;
   }
@@ -575,7 +503,10 @@ body.dark-theme .settings-page select {
     margin-bottom: 15px;
   }
 
-  .button {
+  .button,
+  #home-button,
+  #save-settings,
+  #back-button {
     font-size: 0.85rem;
     padding: 8px 16px;
     margin: 3px;
