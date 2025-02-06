@@ -4,7 +4,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: "./src/index.jsx",
   output: {
     filename: "main.js",
     path: path.resolve(__dirname, "dist"),
@@ -20,7 +20,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/, // Применяется ко всем .js файлам
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/, // Исключить папку node_modules
         use: {
           loader: "babel-loader", // Используем babel-loader для обработки JS
@@ -45,6 +45,6 @@ module.exports = {
     open: true, // Автоматически открывает браузер
   },
   resolve: {
-    extensions: [".js", ".css"], // Автоматическое добавление расширений
+    extensions: [".js", ".jsx", ".css"], // Автоматическое добавление расширений
   },
 };
