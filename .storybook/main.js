@@ -14,5 +14,11 @@ const config = {
     options: {},
   },
   staticDirs: ["../public"],
+  references: [
+    {
+      title: "Design System",
+      url: "https://your-design-system-storybook.com", // Замени на URL твоего Storybook дизайн-системы
+    },
+  ],
 };
 export default config;
